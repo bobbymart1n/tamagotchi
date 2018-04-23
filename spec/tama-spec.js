@@ -36,7 +36,12 @@ describe('TamaPet', function() {
   });
   it('should sleep when hours reach between 19 and 9', function() {
     testPet.date.setHours(20);
-    testPet.sleep();
+    console.log(testPet.date);
+    testPet.bedtime();
     expect(testPet.sleep).toEqual(true);
+  });
+  it('should make make pet bigger every hour', function() {
+    jasmine.clock().tick(3.6e+6);
+    expect(testPet.age).toEqual(2);
   });
 });
