@@ -30,4 +30,13 @@ describe('TamaPet', function() {
     jasmine.clock().tick(20001);
     expect(testPet.dirty).toEqual(1);
   });
+  it('should want to play only when it fed', function() {
+    jasmine.clock().tick(7001);
+    expect(testPet.play()).toEqual(false);
+  });
+  it('should sleep when hours reach between 19 and 9', function() {
+    testPet.date.setHours(20);
+    testPet.sleep();
+    expect(testPet.sleep).toEqual(true);
+  });
 });
