@@ -7,9 +7,8 @@ let pet = {
   hunger: function(){
     const hungerInterval = setInterval(()=> {
       this.tummy--;
-      if (this.tummy == 0) {
+      if (this.petCemetery() === true) {
         clearInterval(hungerInterval);
-        return "Why did you kill me daddy?";
       }
     }, 1000)
   },
@@ -35,15 +34,17 @@ let pet = {
   pooper: function(){
     const poopInterval = setInterval(()=> {
       this.dirty++;
-      if (this.dirty > 5) {
+      if (this.petCemetery === true) {
         clearInterval(poopInterval);
-        return "Why did you kill me daddy?";
       }
     }, 20000)
   },
   birthday: function() {
     const ageInterval = setInterval(()=> {
       this.age++;
+      if(this.petCemetery() === true) {
+        clearInterval(ageInterval);
+      }
     }, 3600000)
   },
 };
