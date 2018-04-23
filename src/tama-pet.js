@@ -3,6 +3,7 @@ let pet = {
   tummy: 10,
   dirty: 0,
   sleep: false,
+  age: 0,
   hunger: function(){
     const hungerInterval = setInterval(()=> {
       this.tummy--;
@@ -39,7 +40,12 @@ let pet = {
         return "Why did you kill me daddy?";
       }
     }, 20000)
-  }
+  },
+  birthday: function() {
+    const ageInterval = setInterval(()=> {
+      this.age++;
+    }, 3600000)
+  },
 };
 
 export { pet }
