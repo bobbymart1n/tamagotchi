@@ -41,7 +41,8 @@ describe('TamaPet', function() {
     expect(testPet.sleep).toEqual(true);
   });
   it('should make make pet bigger every hour', function() {
-    jasmine.clock().tick(3.6e+6);
-    expect(testPet.age).toEqual(2);
+    testPet.birthday();
+    jasmine.clock().tick(3600001);
+    expect(testPet.age).toEqual(1);
   });
 });
