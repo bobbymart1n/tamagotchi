@@ -1,6 +1,8 @@
 let pet = {
+  date: new Date(),
   tummy: 10,
   dirty: 0,
+  sleep: false,
   hunger: function(){
     const hungerInterval = setInterval(()=> {
       this.tummy--;
@@ -15,6 +17,18 @@ let pet = {
       return false;
     } else {
       return true;
+    }
+  },
+  play: function(){
+    if (this.tummy > 5) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  sleep: function() {
+    if(this.date.getHours() > 19 && this.date.getHours() < 9) {
+      this.sleep = true;
     }
   },
   pooper: function(){
