@@ -17,6 +17,15 @@ let pet = {
       return true;
     }
   },
+  pooper: function(){
+    const poopInterval = setInterval(()=> {
+      this.dirty++;
+      if (this.dirty > 5) {
+        clearInterval(poopInterval);
+        return "Why did you kill me daddy?";
+      }
+    }, 20000)
+  }
 };
 
 export { pet }
