@@ -1,13 +1,21 @@
 let pet = {
-  tummy: 0,
+  tummy: 10,
+  dirty: 0,
   hunger: function(){
     const hungerInterval = setInterval(()=> {
-      this.tummy++;
-      if (this.tummy > 10){
+      this.tummy--;
+      if (this.tummy == 0) {
         clearInterval(hungerInterval);
-        return "Mmmmm... thank you daddy!"
+        return "Why did you kill me daddy?";
       }
     }, 1000)
+  },
+  petCemetery: function(){
+    if (this.tummy > 0 && this.dirty < 10) {
+      return false;
+    } else {
+      return true;
+    }
   },
 };
 
