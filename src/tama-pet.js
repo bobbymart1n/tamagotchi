@@ -26,8 +26,8 @@ let pet = {
       return false;
     }
   },
-  sleep: function() {
-    if(this.date.getHours() > 19 && this.date.getHours() < 9) {
+  bedtime: function() {
+    if(this.date.getHours() > 19 || this.date.getHours() < 9) {
       this.sleep = true;
     }
   },
