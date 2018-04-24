@@ -1,26 +1,65 @@
 import { pet } from './tama-pet.js';
+import { requestPlayful } from './playful-interface.js';
+import { requestGameOver } from './gameover-interface.js';
+import { requestUnplayful } from './unplayful-interface.js';
+import { requestSleep } from './sleep-interface.js';
+import { requestEat } from './eat-interface.js';
+import { requestIdol } from './idol-interface.js';
+import { requestClean } from './clean-interface.js';
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
+function progressBars() {
+  const statusCheckInterval = setInterval(()=> {
+    $("#playfullness").attr('src', `${requestPlayful.response.data.images.fixed_width_small.url}`);
+    $("#health").css('width', (pet.health * 5) + '%');
+    $("#clean").css('width', (pet.dirty * 10) + '%');
+    $("#tummy").css('width', (pet.tummy * 10) + '%');
+    $("#age span").text(pet.age);
+    if (pet.petCemetery() === true) {
+      clearInterval(statusCheckInterval);
+      $("#health").css('width', 0 + '%');
+      $(".pet-screen img").attr('src', `${requestGameOver.response.data.images.fixed_width.url}`)
+    }
+  }, 1000)
+}
+
 $(function() {
+  const idol = setTimeout(() => {
+    $(".pet-screen img").attr('src', `${requestIdol.response.data.images.fixed_width.url}` );
+  }, 4000);
   $("#startPet").submit(function(event) {
     event.preventDefault();
-    let newPet = pet;
     $(this).hide();
     $(".pet-container").show();
-    $("#age span").text(newPet.age);
-    $.ajax({
-      url: `http://api.giphy.com/v1/gifs/JIX9t2j0ZTN9S?api_key=${process.env.API_KEY}`,
-      type: 'GET',
-      data: {
-        format: 'json'
-      },
-      success: function(res) {
-        console.log(res);
-        $("#playfullness").append(`<img src=${res.data.images.fixed_width_small.url}>`)
+    $("#feed").click(function() {
+      if (pet.tummy < 10) {
+        pet.tummy += 2;
+        $(".pet-screen img").attr('src', `${requestEat.response.data.images.fixed_width.url}` );
+        idol();
+        if (pet.health < 20) {
+          pet.health += 5;
+        }
       }
     });
+    $("#scoop").click(function() {
+      if (pet.dirty > 0) {
+        pet.dirty = 0;
+        $(".pet-screen img").attr('src', `${requestClean.response.data.images.fixed_width.url}` );
+        if (pet.health < 20) {
+          pet.health += 5;
+        }
+      }
+    });
+    // $("#play").click(function() {
+    //
+    // });
+    pet.hunger();
+    pet.pooper();
+    pet.birthday();
+    progressBars();
+
   });
 });

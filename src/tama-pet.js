@@ -3,10 +3,12 @@ let pet = {
   tummy: 10,
   dirty: 0,
   sleep: false,
+  health: 20,
   age: 0,
   hunger: function(){
     const hungerInterval = setInterval(()=> {
       this.tummy--;
+      this.health--;
       if (this.petCemetery() === true) {
         clearInterval(hungerInterval);
       }
@@ -34,10 +36,11 @@ let pet = {
   pooper: function(){
     const poopInterval = setInterval(()=> {
       this.dirty++;
+      this.health--;
       if (this.petCemetery === true) {
         clearInterval(poopInterval);
       }
-    }, 20000)
+    }, 4000)
   },
   birthday: function() {
     const ageInterval = setInterval(()=> {
@@ -45,7 +48,7 @@ let pet = {
       if(this.petCemetery() === true) {
         clearInterval(ageInterval);
       }
-    }, 3600000)
+    }, 60000)
   },
 };
 
