@@ -12,14 +12,14 @@ $(function() {
     $(".pet-container").show();
     $("#age span").text(newPet.age);
     $.ajax({
-      url: `http://api.giphy.com/v1/gifs/CjrB9Mo0o4DNC?api_key=${process.env.API_KEY}`,
+      url: `http://api.giphy.com/v1/gifs/JIX9t2j0ZTN9S?api_key=${process.env.API_KEY}`,
       type: 'GET',
       data: {
         format: 'json'
       },
       success: function(res) {
         console.log(res);
-        $("#playfullness").append(`<img src=${res.data.url}>`)
+        $("#playfullness").append(`<img src=${res.data.images.fixed_width_small.url}>`)
       }
     });
   });
