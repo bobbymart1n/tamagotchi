@@ -1,9 +1,9 @@
 import { pet } from './tama-pet.js';
 import { requestPlayful } from './playful-interface.js';
 import { requestGameOver } from './gameover-interface.js';
-import { requestUnplayful } from './unplayful-interface.js';
+// import { unplayfulPromise } from './unplayful-interface.js';
 import { requestSleep } from './sleep-interface.js';
-import { requestEat } from './eat-interface.js';
+import { Eat } from './eat-interface.js';
 import { requestIdol } from './idol-interface.js';
 import { requestClean } from './clean-interface.js';
 import $ from 'jquery';
@@ -27,9 +27,13 @@ function progressBars() {
 }
 
 $(function() {
-  const idol = setTimeout(() => {
-    $(".pet-screen img").attr('src', `${requestIdol.response.data.images.fixed_width.url}` );
-  }, 4000);
+  let eating = new Eat();
+  function idol() {
+    setTimeout(() => {
+      $(".pet-screen img").attr('src', `${requestIdol.response.data.images.fixed_width.url}` );
+    }, 4000)
+  }
+
   $("#startPet").submit(function(event) {
     event.preventDefault();
     $(this).hide();
@@ -37,7 +41,9 @@ $(function() {
     $("#feed").click(function() {
       if (pet.tummy < 10) {
         pet.tummy += 2;
-        $(".pet-screen img").attr('src', `${requestEat.response.data.images.fixed_width.url}` );
+      eating.eatingCall().then(function(response) {
+        $(".pet-screen img").attr('src', response.data.images.fixed_width.url);
+      })
         idol();
         if (pet.health < 20) {
           pet.health += 5;
