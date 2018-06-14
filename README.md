@@ -1,9 +1,9 @@
-# JS Template Repo for Epicodus
+# Tamagotchi App
 
 ## By Bobby Martin
 
 # Description
-This is a template directory to make things go quicker in the morning.
+This project was built to represent obtained knowledge using RESTful APIs
 
 # Specifications
 * Create a pet that sleeps and needs to be fed, played with and cleaned after.
